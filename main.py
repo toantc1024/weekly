@@ -22,7 +22,7 @@ class RequestBody(BaseModel):
 
 @app.post("/plan")
 async def plan(body: RequestBody):
-    data = body.dict()
+    data = body.model_dump()
     schedule_data = data["schedule"]
     tasks_to_schedule = []
     for task in data["tasks"]:
