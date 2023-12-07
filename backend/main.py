@@ -10,7 +10,6 @@ origins = [
     "http://localhost.tiangolo.com",
     "https://localhost.tiangolo.com",
     "http://localhost",
-    "https://www.thunderclient.com",
     "http://localhost:8080",
     "http://localhost:3000",
     "http://localhost:*",
