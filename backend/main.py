@@ -13,6 +13,7 @@ origins = [
     "http://localhost:8080",
     "http://localhost:3000",
     "http://localhost:*",
+    "https://weekly-app-sigma.vercel.app"
 ]
 
 app.add_middleware(
@@ -57,6 +58,4 @@ async def plan(body: RequestBody):
     # day.description()
 
     return {"solution": solution
-
-
             }
