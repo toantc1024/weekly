@@ -13,3 +13,9 @@ pip-selfcheck.json
 
 virtual
 env
+
+**/node_modules
+**/bower_components
+**/jspm_packages
+**/__pycache__
+**/venv
