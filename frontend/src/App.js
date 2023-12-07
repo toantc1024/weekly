@@ -1,23 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import "./App.css";
 
 function App() {
+  const getData = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_ENDPOINT_DEV}/plan`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          schedule: [
+            {
+              day: 0,
+              start: "7:00",
+              end: "8:50",
+              task: "Physicology",
+            },
+            {
+              day: 1,
+              start: "7:00",
+              end: "8:50",
+              task: "Physicology B",
+            },
+            {
+              day: 1,
+              start: "9:00",
+              end: "10:50",
+              task: "Physicology C",
+            },
+          ],
+          tasks: [
+            {
+              name: "Watch Coraline",
+              duration: 150,
+            },
+          ],
+        }),
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+  };
+  useEffect(() => {
+    // getData();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button
+        onClick={() => {
+          getData();
+        }}
+      >
+        Fetch
+      </button>
     </div>
   );
 }
