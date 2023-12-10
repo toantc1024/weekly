@@ -34,21 +34,21 @@ class Node:
 
         # Improvement: Sort current_week.days array that has less tasks and Monday->Sunday
         # Priority: Weekday that has less tasks and Monday->Sunday
+        current_week = copy.deepcopy(self.week)
+
+        copy_current_week = copy.deepcopy(current_week)
+        copy_current_week.days.sort(key=sort_key)
+
+        traverse_order = []
+        for i in range(0, len(copy_current_week.days)):
+            traverse_order.append(weekdays.index(
+                copy_current_week.days[i].title))
 
         for task in self.tasks_to_schedule:
             # Priority: Weekday that has less tasks
             current_week = copy.deepcopy(self.week)
 
-            copy_current_week = copy.deepcopy(current_week)
-            copy_current_week.days.sort(key=sort_key)
-
-            traverse_order = []
-            for i in range(0, len(copy_current_week.days)):
-                traverse_order.append(weekdays.index(
-                    copy_current_week.days[i].title))
-
-            for _ in range(0, len(traverse_order)):
-                i = traverse_order[_]
+            for i in traverse_order:
                 # Who want to start a day at specific time? User.
                 start_time = convert_time(START_TIME)
                 # User will set specific time that they don't want to add any task!

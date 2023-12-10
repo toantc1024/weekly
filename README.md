@@ -4,12 +4,12 @@
 
 # 1. Backend
 
-Dẫn tới thư mục chưa backend,
+Dẫn tới thư mục chứa backend,
 
 ```cd backend```
 
 Tạo môi trường ảo
-``python3 -m venv venv```
+```python3 -m venv venv```
 
 Kích hoạt môi trường ảo
 Linux: ```source venv/bin/active```

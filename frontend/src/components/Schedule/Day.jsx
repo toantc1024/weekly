@@ -5,10 +5,11 @@ const Day = ({ day }) => {
   const { schedule, removeTaskFromDay, updateTaskFromDay } = scheduleStore();
 
   const updateTask = (id, task) => {
-    updateTaskFromDay(id, task, day);
+    console.log("updateTask");
+    updateTaskFromDay(id, task, day, schedule);
   };
   const removeTask = (id) => {
-    removeTaskFromDay(id, day);
+    removeTaskFromDay(id, day, schedule);
   };
   return (
     schedule &&

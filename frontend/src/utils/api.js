@@ -17,9 +17,9 @@ export const postData = async ({ tasks, schedule }) => {
   try {
     const response = await fetch(
       `${
-        process.env.NODE_ENV === "production"
-          ? process.env.REACT_APP_BACKEND_ENDPOINT_PROD
-          : process.env.REACT_APP_BACKEND_ENDPOINT_DEV
+        process.env.REACT_APP_MODE === "DEVELOPMENT"
+          ? process.env.REACT_APP_BACKEND_ENDPOINT_DEV
+          : process.env.REACT_APP_BACKEND_ENDPOINT_PROD
       }/plan`,
       {
         method: "POST",

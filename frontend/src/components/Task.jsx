@@ -15,17 +15,19 @@ const Task = ({ id, name, duration, start, end, updateTask, removeTask }) => {
       startTask !== start ||
       endTask !== end
     ) {
+      console.log(startTask, start, endTask, end);
       updateTask(id, {
         name: taskName,
         duration: taskDuration,
         start: startTask,
         end: endTask,
+        id: id, // still need to pass id :)
       });
       // setIsChanged(true);
     } else {
       setIsChanged(false);
     }
-  }, [taskName, taskDuration]);
+  }, [taskName, taskDuration, startTask, endTask]);
 
   return (
     <div

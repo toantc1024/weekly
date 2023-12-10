@@ -36,9 +36,12 @@ export const taskStore = create((set) => ({
       tasks: state.tasks.filter((task) => task.id !== id),
     })),
   updateTask: (id, task) => {
-    set((state) => ({
-      tasks: state.tasks.map((t) => (t.id === id ? task : t)),
-    }));
+    set((state) => {
+      console.log(state.tasks);
+      return {
+        tasks: state.tasks.map((t) => (t.id === id ? task : t)),
+      };
+    });
   },
   clearTasks: () => set({ tasks: [] }),
 }));
@@ -47,42 +50,35 @@ export const scheduleStore = create((set) => ({
   schedule: {},
   setSchedule: (schedule) => set({ schedule: schedule }),
   clearSchedule: () => set({ schedule: {} }),
-  addTaskToDay: (task, day) => {
-    set((state) => {
-      if (state.schedule === null) {
-        state.schedule = {};
-      }
-      let dayTask = state.schedule[day] ? state.schedule[day] : [];
-      dayTask.push(task);
-      let newSchedule = state.schedule;
-      newSchedule[day] = dayTask;
-      return { schedule: newSchedule };
-    });
+  addTaskToDay: (task, day, schedule) => {
+    if (!schedule) {
+      schedule = {};
+    }
+    let dayTask = schedule[day] ? schedule[day] : [];
+    dayTask.push(task);
+    let newSchedule = schedule;
+    newSchedule[day] = dayTask;
+    set({ schedule: newSchedule });
   },
-  removeTaskFromDay: (id, day) => {
-    set((state) => {
-      let dayTask = state.schedule[day] ? state.schedule[day] : [];
-      dayTask = dayTask.filter((task) => task.id !== id);
-      let newSchedule = state.schedule;
-      newSchedule[day] = dayTask;
-      return { schedule: newSchedule };
-    });
+  removeTaskFromDay: (id, day, schedule) => {
+    let dayTask = schedule[day] ? schedule[day] : [];
+    dayTask = dayTask.filter((task) => task.id !== id);
+    let newSchedule = schedule;
+    newSchedule[day] = dayTask;
+    set({ schedule: newSchedule });
   },
-  updateTaskFromDay: (id, task, day) => {
-    set((state) => {
-      let dayTask = state.schedule[day] ? state.schedule[day] : [];
-      dayTask = dayTask.map((t) => (t.id === id ? task : t));
-      let newSchedule = state.schedule;
-      newSchedule[day] = dayTask;
-      return { schedule: newSchedule };
-    });
+  updateTaskFromDay: (id, task, day, schedule) => {
+    console.log(schedule);
+    let dayTask = schedule[day] ? schedule[day] : [];
+    dayTask = dayTask.map((t) => (t.id === id ? task : t));
+    let newSchedule = schedule;
+    newSchedule[day] = dayTask;
+    set({ schedule: newSchedule });
   },
-  clearTasksFromDay: (day) => {
-    set((state) => {
-      let newSchedule = state.schedule;
-      newSchedule[day] = [];
-      return { schedule: newSchedule };
-    });
+  clearTasksFromDay: (day, schedule) => {
+    let newSchedule = schedule;
+    newSchedule[day] = [];
+    set({ schedule: newSchedule });
   },
   clearAllTasks: () => set({ schedule: {} }),
 }));

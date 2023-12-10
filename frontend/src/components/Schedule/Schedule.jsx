@@ -18,7 +18,7 @@ const Schedule = () => {
       <div
         className="flex flex-col gap-2 bg-yellow-300 text-white  w-full rounded-lg p-2 flex items-center justify-center text-2xl bg-gray-100 hover:bg-yellow-500 cursor-pointer"
         onClick={() => {
-          addTaskToDay(makeTask("New Task", "5:00", "6:00", 60), i);
+          addTaskToDay(makeTask("New Task", "5:00", "6:00", 60), i, schedule);
           // Scroll overflow-y-auto to bottom of day element
           const dayElement = document.getElementById(day);
           dayElement.scrollTo({

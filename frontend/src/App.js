@@ -1,16 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
+import { GrDocumentCsv } from "react-icons/gr";
 import { postData } from "./utils/api";
 import Task from "./components/Task";
 import { makeTask, scheduleStore, taskStore } from "./utils/store";
-import {
-  HiArrowLeft,
-  HiChevronLeft,
-  HiPaperAirplane,
-  HiPlus,
-  HiTrash,
-} from "react-icons/hi";
+import { HiPaperAirplane, HiPlus, HiTrash } from "react-icons/hi";
 import Schedule from "./components/Schedule/Schedule";
 
 function App() {
@@ -23,6 +18,7 @@ function App() {
   useEffect(() => {
     lastEle.current.scrollIntoView({ behavior: "smooth" });
   }, [tasks]);
+  const fileInput = useRef(null);
 
   return (
     <div className=" h-screen w-screen relative p-4 bg-yellow-400">
@@ -47,17 +43,46 @@ function App() {
             <div ref={lastEle}></div>
           </div>
 
-          <div className="flex gap-2 p-2 bg-yellow-400 rounded-lg">
+          <div className="flex items-center justify-between gap-2 p-2 bg-yellow-400 rounded-lg">
             <button
-              className=" px-4 outline-none  bg-yellow-500 text-white hover:bg-yellow-600 transition-all ease-in-out duration-150 rounded-lg p-2"
+              className=" px-2 outline-none  bg-yellow-500 text-white hover:bg-yellow-600 transition-all ease-in-out duration-150 rounded-lg p-2"
               onClick={() => {
                 addTask(makeTask("", "0:00", "0:00", 0));
               }}
             >
               <HiPlus />
             </button>
+
+            <input
+              ref={fileInput}
+              className="hidden"
+              type={"file"}
+              accept={".csv"}
+            />
+
             <button
-              className="px-4 outline-none bg-yellow-500 text-white hover:bg-yellow-600 transition-all ease-in-out duration-150 rounded-lg p-2"
+              className="hidden px-2 outline-none bg-yellow-500 text-white hover:bg-yellow-600 transition-all ease-in-out duration-150 rounded-lg p-2"
+              onClick={(e) => {
+                e.preventDefault();
+                fileInput.current.click();
+                fileInput.current.onchange = async (e) => {
+                  let file = e.target.files[0];
+                  let reader = new FileReader();
+                  reader.readAsText(file);
+                  reader.onload = async (e) => {
+                    let text = e.target.result;
+                    let data = JSON.parse(text);
+                    // let newSchedule = await postData(data);
+                    console.log(data);
+                    // setSchedule(newSchedule);
+                  };
+                };
+              }}
+            >
+              <GrDocumentCsv />
+            </button>
+            <button
+              className="px-2 outline-none bg-yellow-500 text-white hover:bg-yellow-600 transition-all ease-in-out duration-150 rounded-lg p-2"
               onClick={() => {
                 clearTasks();
               }}
@@ -65,7 +90,7 @@ function App() {
               <HiTrash />
             </button>
             <button
-              className="outline-none w-full flex items-center justify-center  p-2 bg-yellow-500 text-white hover:bg-yellow-600 transition-all ease-in-out duration-150  rounded-lg"
+              className="outline-none w-full flex items-center justify-center  px-0 py-2 bg-yellow-500 text-white hover:bg-yellow-600 transition-all ease-in-out duration-150  rounded-lg"
               onClick={async () => {
                 // Get tasks
                 setIsLoading(true);
@@ -104,7 +129,7 @@ function App() {
         <div className="relative flex h-full w-full overflow-y-auto justify-between bg-yellow-100 rounded-lg gap-4 p-2">
           {isLoading && (
             <div
-              className={`fixed bg-yellow-400 absolute z-[99999] top-0 right-0 left-0 bottom-0 flex items-center justify-center transition-all ease-in-out duration-10`}
+              className={`fixed bg-yellow-400 absolute z-[99999] top-0 right-0 left-0 bottom-0 flex items-center justify-center transition-all ease-in-out duration-10 flex gap-2`}
             >
               <span className="animate-bounce text-4xl p-2 rounded-lg text-yellow-900 bg-yellow-200">
                 ✨
