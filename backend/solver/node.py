@@ -47,8 +47,8 @@ class Node:
                         new_node = Node(parent=self, week=new_week,
                                         tasks_to_schedule=new_tasks_to_schedule)
                         # new_node.g = len(new_tasks_to_schedule)
-                        new_node.g = self.g + 1
-                        new_node.h = self.week.total_tasks()
+                        new_node.g = 0
+                        new_node.h = self.week.max_tasks_per_day()
                         new_node.f = new_node.g + new_node.h
 
                         childrens.append(new_node)

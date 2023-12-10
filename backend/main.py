@@ -49,9 +49,7 @@ async def plan(body: RequestBody):
     tasks_to_schedule = []
     for task in data["tasks"]:
         tasks_to_schedule.append((task["name"], task["duration"]))
-    print(schedule_data, tasks_to_schedule)
     problem = Problem(schedule_data=schedule_data,
                       tasks_to_schedule=tasks_to_schedule)
-
     solution = astar(problem)
     return {"solution": solution}
