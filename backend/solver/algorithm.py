@@ -58,6 +58,7 @@ def astar(problem):
 
     while len(frontier) > 0:
         node = heapq.heappop(frontier)[1]
+        print(node.week.days)
         explored.append(node)
 
         if node.goal_test():

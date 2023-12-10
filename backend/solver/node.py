@@ -49,6 +49,7 @@ class Node:
             current_week = copy.deepcopy(self.week)
 
             for i in traverse_order:
+
                 # Who want to start a day at specific time? User.
                 start_time = convert_time(START_TIME)
                 # User will set specific time that they don't want to add any task!
@@ -65,11 +66,14 @@ class Node:
                     if (can_add):
                         new_tasks_to_schedule = self.tasks_to_schedule.copy()
                         new_tasks_to_schedule.remove(task)
+                        print(len(new_tasks_to_schedule),
+                              len(self.tasks_to_schedule))
+                        # break
                         new_node = Node(parent=self, week=new_week,
                                         tasks_to_schedule=new_tasks_to_schedule)
                         # new_node.g = len(new_tasks_to_schedule)
                         new_node.g = 0
-                        new_node.h = current_week.min_tasks_per_day()
+                        new_node.h = current_week.max_tasks_per_day()
                         new_node.f = new_node.g + new_node.h
 
                         childrens.append(new_node)
