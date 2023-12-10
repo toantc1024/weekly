@@ -92,7 +92,6 @@ function App() {
                   schedule: parse_schedule,
                 });
                 setIsLoading(true);
-                console.log(newSchedule);
                 setSchedule(newSchedule);
                 clearTasks();
                 setIsLoading(false);
@@ -105,10 +104,12 @@ function App() {
         <div className="relative flex h-full w-full overflow-y-auto justify-between bg-yellow-100 rounded-lg gap-4 p-2">
           <div
             className={`fixed ${
-              isLoading ? "opacity-[1]" : "hidden"
+              isLoading ? "block" : "hidden"
             } bg-yellow-400 absolute z-[99999] top-0 right-0 left-0 bottom-0 flex items-center justify-center transition-all ease-in-out duration-10`}
           >
-            Loading...
+            <span className="animate-pulse text-4xl p-2 rounded-lg text-yellow-900 bg-yellow-200">
+              Loading...
+            </span>
           </div>
           <Schedule />{" "}
         </div>
