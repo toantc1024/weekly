@@ -47,6 +47,8 @@ async def plan(body: RequestBody):
     data = body.model_dump()
     schedule_data = data["schedule"]
     tasks_to_schedule = []
+
+    print('Processing...')
     for task in data["tasks"]:
         tasks_to_schedule.append((task["name"], task["duration"]))
     problem = Problem(schedule_data=schedule_data,
