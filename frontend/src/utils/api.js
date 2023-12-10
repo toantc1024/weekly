@@ -13,11 +13,6 @@ const addId = (data) => {
 };
 export const postData = async ({ tasks, schedule }) => {
   console.log("Calling api", tasks, schedule);
-  alert(
-    process.env.REACT_APP_MODE === "DEVELOPMENT"
-      ? process.env.REACT_APP_BACKEND_ENDPOINT_DEV
-      : process.env.REACT_APP_BACKEND_ENDPOINT_PROD
-  );
   try {
     const response = await fetch(
       `${
