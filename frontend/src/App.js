@@ -68,6 +68,7 @@ function App() {
               className="outline-none w-full flex items-center justify-center  p-2 bg-yellow-500 text-white hover:bg-yellow-600 transition-all ease-in-out duration-150  rounded-lg"
               onClick={async () => {
                 // Get tasks
+                setIsLoading(true);
                 let parse_schedule = [];
                 Object.keys(schedule).forEach((day) => {
                   return schedule[day].forEach((task) => {
@@ -91,7 +92,6 @@ function App() {
                   tasks: parse_tasks,
                   schedule: parse_schedule,
                 });
-                setIsLoading(true);
                 setSchedule(newSchedule);
                 clearTasks();
                 setIsLoading(false);
