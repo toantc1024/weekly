@@ -106,8 +106,11 @@ function App() {
             <div
               className={`fixed bg-yellow-400 absolute z-[99999] top-0 right-0 left-0 bottom-0 flex items-center justify-center transition-all ease-in-out duration-10`}
             >
-              <span className="animate-pulse text-4xl p-2 rounded-lg text-yellow-900 bg-yellow-200">
-                Loading...
+              <span className="animate-bounce text-4xl p-2 rounded-lg text-yellow-900 bg-yellow-200">
+                ✨
+              </span>
+              <span className="animate-bounce text-4xl p-2 rounded-lg text-yellow-900 bg-yellow-200">
+                Weekly is working on your schedule
               </span>
             </div>
           )}

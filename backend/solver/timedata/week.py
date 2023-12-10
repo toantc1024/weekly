@@ -1,13 +1,11 @@
-import pandas as pd
 from .day import *
-from .task import Task
-import sys
+
+weekdays = ['Monday', 'Tuesday', 'Wednesday',
+            'Thursday', 'Friday', 'Saturday', 'Sunday']
 
 
 class Week:
     def __init__(self, days=[]):
-        self.weekdays = ["Thứ 2", "Thứ 3", "Thứ 4",
-                         "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"]
         self.days = days
         if (len(days) == 0):
             self.init_week()
@@ -18,6 +16,10 @@ class Week:
             value = max(value, day.count_task())
         return value
 
+    def min_tasks_per_day(self):
+        total_tasks = sum(len(day.tasks) for day in self.days)
+        return total_tasks
+
     def get_info(self):
         week_info = {}
         for i in range(0, len(self.days)):
@@ -25,6 +27,6 @@ class Week:
         return week_info
 
     def init_week(self):
-        for weekday in self.weekdays:
+        for weekday in weekdays:
             day = Day(title=weekday)
             self.days.append(day)
