@@ -93,7 +93,7 @@ function App() {
                 });
                 setIsLoading(true);
                 console.log(newSchedule);
-                // setSchedule(newSchedule);
+                setSchedule(newSchedule);
                 clearTasks();
                 setIsLoading(false);
               }}
