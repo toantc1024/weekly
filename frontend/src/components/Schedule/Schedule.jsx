@@ -8,7 +8,10 @@ const Schedule = () => {
 
   const dayOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   return dayOfWeek.map((day, i) => (
-    <div className="h-full w-full flex flex-col border-[1px] bg-yellow-200 rounded-lg  p-2 gap-2">
+    <div
+      key={i}
+      className="h-full w-full flex flex-col border-[1px] border-yellow-900 bg-yellow-200 rounded-lg  p-2 gap-2"
+    >
       <div className="bg-yellow-400 text-white  w-full rounded-lg p-2 flex items-center justify-center font-bold">
         {day}
       </div>

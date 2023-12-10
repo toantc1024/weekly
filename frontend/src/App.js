@@ -10,10 +10,16 @@ import Schedule from "./components/Schedule/Schedule";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
-  const { schedule, setSchedule } = scheduleStore();
+  const { schedule, setSchedule, clearSchedule } = scheduleStore();
   const { tasks, addTask, removeTask, updateTask, clearTasks } = taskStore();
   // Create mapping for i in day of week
   // Create mapping for i in time of day
+
+  useEffect(() => {
+    clearSchedule();
+    clearTasks();
+  }, []);
+
   const lastEle = useRef(null);
   useEffect(() => {
     lastEle.current.scrollIntoView({ behavior: "smooth" });

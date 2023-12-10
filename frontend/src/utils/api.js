@@ -12,7 +12,6 @@ const addId = (data) => {
   return res;
 };
 export const postData = async ({ tasks, schedule }) => {
-  console.log("Calling api", tasks, schedule);
   try {
     const response = await fetch(
       `${
